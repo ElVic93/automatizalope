@@ -1,0 +1,23 @@
+:root {
+  /* Colores principales */
+  --color-primary: #2962FF;
+  --color-secondary: #64B5F6;
+  
+  /* Colores de texto */
+  --color-text: #374151;
+  --color-text-light: #6B7280;
+  
+  /* Colores de fondo */
+  --color-background: #FFFFFF;
+  --color-gray-light: #F3F4F6;
+  --color-gray-lighter: #E5E7EB;
+  
+  /* Colores de estado */
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  --color-info: #3B82F6;
+  
+  /* Colores específicos */
+  --color-whatsapp: #25D366;
+} 

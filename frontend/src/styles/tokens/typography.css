@@ -1,0 +1,22 @@
+:root {
+  /* Familias de fuentes */
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Poppins', sans-serif;
+  --font-tertiary: 'Montserrat', sans-serif;
+  --font-quaternary: 'Lato', sans-serif;
+
+  /* Tamaños de fuente */
+  --font-size-h1: 2rem;    /* 32px */
+  --font-size-h2: 1.5rem;  /* 24px */
+  --font-size-h3: 1.25rem; /* 20px */
+  --font-size-base: 1rem;  /* 16px */
+  --font-size-small: 0.875rem; /* 14px */
+
+  /* Pesos de fuente */
+  --font-weight-bold: 700;
+  --font-weight-medium: 500;
+  --font-weight-regular: 400;
+
+  /* Altura de línea */
+  --line-height-base: 1.4;
+} 
