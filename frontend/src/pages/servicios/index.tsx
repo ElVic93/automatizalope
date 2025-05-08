@@ -1,41 +1,13 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import Layout from '../../components/layout/Layout';
 import Container from '../../components/ui/Container';
 import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
 import Grid from '../../components/ui/Grid';
+import { mockServices } from '../../data/mockData';
 
 const ServicesPage: React.FC = () => {
-  const services = [
-    {
-      title: 'Automatización de Procesos',
-      description: 'Transformamos tus tareas manuales en procesos automatizados, aumentando la eficiencia y reduciendo errores.',
-      features: [
-        'Análisis de procesos actuales',
-        'Diseño de soluciones automatizadas',
-        'Implementación y seguimiento'
-      ]
-    },
-    {
-      title: 'Integración de Sistemas',
-      description: 'Conectamos tus diferentes sistemas y aplicaciones para un flujo de trabajo sin interrupciones.',
-      features: [
-        'Integración API',
-        'Sincronización de datos',
-        'Monitoreo en tiempo real'
-      ]
-    },
-    {
-      title: 'Desarrollo de Software a Medida',
-      description: 'Creamos soluciones personalizadas que se adaptan perfectamente a las necesidades de tu negocio.',
-      features: [
-        'Análisis de requerimientos',
-        'Desarrollo ágil',
-        'Soporte continuo'
-      ]
-    }
-  ];
-
   return (
     <Layout
       title="Servicios"
@@ -59,8 +31,8 @@ const ServicesPage: React.FC = () => {
       <section className="py-20">
         <Container>
           <Grid cols={3} gap="lg">
-            {services.map((service, index) => (
-              <Card key={index} variant="elevated">
+            {mockServices.map((service) => (
+              <Card key={service.id} variant="elevated">
                 <Card.Header>
                   <h3 className="text-xl font-semibold">{service.title}</h3>
                 </Card.Header>
@@ -69,7 +41,7 @@ const ServicesPage: React.FC = () => {
                     {service.description}
                   </p>
                   <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
+                    {service.features.slice(0, 3).map((feature, idx) => (
                       <li key={idx} className="flex items-center">
                         <span className="mr-2">•</span>
                         {feature}
@@ -78,9 +50,14 @@ const ServicesPage: React.FC = () => {
                   </ul>
                 </Card.Body>
                 <Card.Footer>
-                  <Button variant="outline" fullWidth>
-                    Más Información
-                  </Button>
+                  <Link to={`/servicios/${service.title
+                    .toLowerCase()
+                    .replace(/[^\w\s]/gi, '')
+                    .replace(/\s+/g, '-')}`}>
+                    <Button variant="outline" fullWidth>
+                      Más Información
+                    </Button>
+                  </Link>
                 </Card.Footer>
               </Card>
             ))}
@@ -99,9 +76,11 @@ const ServicesPage: React.FC = () => {
               Agenda una consulta gratuita y descubre cómo podemos ayudarte a
               automatizar tus procesos.
             </p>
-            <Button variant="primary" size="lg">
-              Contactar Ahora
-            </Button>
+            <Link to="/contacto">
+              <Button variant="primary" size="lg">
+                Contactar Ahora
+              </Button>
+            </Link>
           </div>
         </Container>
       </section>

@@ -1,0 +1,135 @@
+/* Accessibility Enhancements */
+
+/* Focus indicators */
+:focus {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Improved contrast for text on colored backgrounds */
+.text-on-dark {
+  color: #FFFFFF;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.text-on-light {
+  color: var(--color-text);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* ARIA-related styles */
+[aria-hidden="true"] {
+  display: none !important;
+}
+
+[aria-busy="true"] {
+  cursor: wait;
+}
+
+/* Improved focus for interactive elements */
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Ensure touch targets are large enough */
+button,
+a,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"],
+select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Better form element contrast */
+input,
+textarea,
+select {
+  border: 2px solid var(--color-gray-lighter);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  background-color: white;
+  color: var(--color-text);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.25);
+}
+
+/* Error states for form elements */
+.input-error {
+  border-color: var(--color-error) !important;
+}
+
+.error-message {
+  color: var(--color-error);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Loading indicators */
+.loading-indicator {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 3px solid rgba(var(--color-primary-rgb), 0.3);
+  border-radius: 50%;
+  border-top-color: var(--color-primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode */
+@media (forced-colors: active) {
+  button, a {
+    border: 1px solid currentColor;
+  }
+} 

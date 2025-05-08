@@ -1,99 +1,138 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's default starter
-</h1>
+# Automatizalo.pe - Frontend
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+Este proyecto contiene el frontend para Automatizalo.pe, una plataforma que transforma procesos manuales en soluciones automatizadas para negocios.
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+## 🎨 Guía de Estilo y Diseño
 
-## 🚀 Quick start
+### Estructura de Colores
 
-1.  **Create a Gatsby site.**
+#### Colores Primarios
+- **Principal**: Azul oscuro (#1E3A8A) - Utilizar para elementos interactivos principales, énfasis visual y la identidad general de la marca.
+- **Secundario**: Azul claro (#64B5F6) - Utilizar para complementar el principal, acentos secundarios y elementos que requieren menos énfasis.
+- **Acento**: Morado medio (#8E24AA) - Utilizar para destacar llamadas a la acción importantes, enlaces clave y elementos que necesitan una fuerte diferenciación visual.
 
-    Use the Gatsby CLI ([install instructions](https://www.gatsbyjs.com/docs/tutorial/getting-started/part-0/#gatsby-cli)) to create a new site, specifying the default starter.
+#### Colores de Texto
+- **Texto Principal**: Negro (#000000) - Utilizar para el cuerpo principal del texto para máxima legibilidad sobre fondos claros.
+- **Descripciones**: Gris oscuro (#374151) - Utilizar para texto secundario, etiquetas y descripciones donde un contraste ligeramente menor es aceptable.
 
-    ```shell
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+#### Colores de Fondo y Separadores
+- **Fondo claro**: Gris claro (#F3F4F6) - Utilizar como fondo principal para secciones de contenido y áreas donde el contraste con el texto negro sea alto.
+- **Separadores**: Gris muy claro (#E5E7EB) - Utilizar para líneas divisorias sutiles entre secciones o elementos.
+- **Fondo base**: Blanco (#FFFFFF) - Utilizar como el fondo principal de la página.
 
-1.  **Start developing.**
+#### Colores de Estado y Acciones
+- **WhatsApp CTA**: Verde (#25D366) - Utilizar para el botón o enlace de contacto a través de WhatsApp.
+- **Éxito**: Verde (#10B981) - Utilizar para indicar operaciones o estados exitosos.
+- **Error**: Rojo (#EF4444) - Utilizar para indicar errores, alertas críticas o estados fallidos.
+- **Advertencia**: Naranja (#F59E0B) - Utilizar para indicar advertencias o situaciones que requieren precaución.
+- **Información**: Azul (#3B82F6) - Utilizar para mensajes informativos.
 
-    Navigate into your new site’s directory and start it up.
+### Estrategias para la Legibilidad del Texto sobre Imágenes
 
-    ```shell
-    cd my-default-starter/
-    gatsby develop
-    ```
+#### 1. Capa de Superposición Semitransparente Clara
+```css
+.texto-sobre-imagen.overlay-claro {
+  position: relative;
+}
 
-1.  **Open the source code and start editing!**
+.texto-sobre-imagen.overlay-claro::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.15);
+  z-index: 1;
+}
 
-    Your site is now running at `http://localhost:8000`!
+.texto-sobre-imagen.overlay-claro .texto-principal {
+  position: relative;
+  z-index: 2;
+  color: #000000;
+}
+```
 
-    Note: You'll also see a second link: `http://localhost:8000/___graphql`. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby Tutorial](https://www.gatsbyjs.com/docs/tutorial/getting-started/part-4/#use-graphiql-to-explore-the-data-layer-and-write-graphql-queries).
+#### 2. Fondo Semitransparente Claro para el Texto
+```css
+.texto-con-fondo-claro {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px 15px;
+  border-radius: 5px;
+}
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+.texto-con-fondo-claro .texto-principal {
+  color: #000000;
+}
+```
 
-## 🚀 Quick start (Netlify)
+#### 3. Sombra Exterior Sutil
+```css
+.texto-con-sombra {
+  color: #000000;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+}
+```
 
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
+#### 4. Resplandor Exterior Sutil
+```css
+.texto-con-resplandor {
+  color: #000000;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+}
+```
 
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+#### 5. Degradado Semitransparente
+```css
+.texto-con-degradado::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.3) 100%);
+  z-index: 1;
+}
 
-## 🧐 What's inside?
+.texto-con-degradado .texto-principal {
+  position: relative;
+  z-index: 2;
+  color: #000000;
+}
+```
 
-A quick look at the top-level files and directories you'll see in a typical Gatsby project.
+## 🚀 Desarrollo
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package.json
-    └── README.md
+Para iniciar el entorno de desarrollo:
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+```shell
+cd frontend
+npm install
+npm run develop
+```
 
-1.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+El sitio estará disponible en `http://localhost:8000`
 
-1.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+## 📁 Estructura del Proyecto
 
-1.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+```
+frontend/
+├── src/
+│   ├── components/       # Componentes reutilizables
+│   ├── pages/            # Páginas del sitio
+│   ├── templates/        # Plantillas para las páginas generadas dinámicamente
+│   ├── styles/           # Estilos globales y configuración de Tailwind
+│   └── images/           # Imágenes utilizadas en el sitio
+├── gatsby-config.js      # Configuración principal de Gatsby
+├── gatsby-node.js        # Configuración de la generación de páginas
+└── tailwind.config.js    # Configuración de Tailwind CSS
+```
 
-1.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/) for more detail).
+## 🧰 Tecnologías Utilizadas
 
-1.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
-
-1.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-ssr/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
-
-1.  **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
-
-1.  **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
-
-1.  **`README.md`**: A text file containing useful reference information about your project.
-
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/docs/tutorial/getting-started/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[Build, Deploy, and Host On Netlify](https://netlify.com)
-
-The fastest way to combine your favorite tools and APIs to build the fastest sites, stores, and apps for the web. And also the best place to build, deploy, and host your Gatsby sites.
-
-<!-- AUTO-GENERATED-CONTENT:END -->
+- Gatsby.js
+- React
+- TypeScript
+- Tailwind CSS
+- PostCSS

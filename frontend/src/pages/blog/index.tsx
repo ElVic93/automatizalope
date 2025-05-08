@@ -9,6 +9,8 @@ import Input from '../../components/ui/Input';
 const BlogPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [subscriptionStatus, setSubscriptionStatus] = useState<{ submitted: boolean; success?: boolean; message: string }>({ submitted: false, message: '' });
 
   const categories = [
     { id: 'todos', name: 'Todos' },
@@ -154,26 +156,76 @@ const BlogPage: React.FC = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="bg-[var(--color-gray-lighter)] py-20">
+      <section className="bg-[var(--color-gray-lighter)] py-20" aria-labelledby="newsletter-heading">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6">
+            <h2 className="text-3xl font-bold mb-6" id="newsletter-heading">
               Suscríbete a nuestro newsletter
             </h2>
             <p className="text-xl mb-8">
               Recibe las últimas actualizaciones sobre automatización y
               transformación digital directamente en tu correo.
             </p>
-            <div className="flex gap-4 max-w-md mx-auto">
-              <Input
-                type="email"
-                placeholder="Tu correo electrónico"
-                className="flex-grow"
-              />
-              <Button variant="primary">
-                Suscribirse
-              </Button>
-            </div>
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (email) {
+                  setSubscriptionStatus({
+                    submitted: true,
+                    message: 'Procesando suscripción...'
+                  });
+                  
+                  // Simulate API call
+                  setTimeout(() => {
+                    setSubscriptionStatus({
+                      submitted: true,
+                      success: true,
+                      message: '¡Gracias! Te has suscrito correctamente.'
+                    });
+                    setEmail('');
+                  }, 1500);
+                }
+              }}
+              className="max-w-md mx-auto"
+              aria-labelledby="newsletter-heading"
+            >
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Input
+                  type="email"
+                  placeholder="Tu correo electrónico"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-grow"
+                  required
+                  aria-required="true"
+                  autoComplete="email"
+                  label="Correo electrónico"
+                  helperText="Nunca compartiremos tu correo con terceros"
+                />
+                <Button 
+                  type="submit" 
+                  variant="primary"
+                  disabled={subscriptionStatus.submitted && !subscriptionStatus.success}
+                  loading={subscriptionStatus.submitted && !subscriptionStatus.success}
+                  ariaLabel="Suscribirte al newsletter"
+                >
+                  Suscribirse
+                </Button>
+              </div>
+              
+              {subscriptionStatus.message && (
+                <div 
+                  className={`mt-4 p-3 rounded-md ${subscriptionStatus.success ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}
+                  aria-live="polite"
+                  role="status"
+                >
+                  {subscriptionStatus.message}
+                </div>
+              )}
+            </form>
+            <p className="mt-4 text-sm text-[var(--color-text-light)]">
+              <span aria-hidden="true">🔒</span> Política de privacidad: Enviamos aproximadamente 1 correo al mes. Puedes darte de baja en cualquier momento.
+            </p>
           </div>
         </Container>
       </section>

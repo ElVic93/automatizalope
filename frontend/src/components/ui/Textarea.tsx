@@ -1,13 +1,13 @@
 import React, { forwardRef } from 'react';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;
   helperText?: string;
   fullWidth?: boolean;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(({
   label,
   error,
   helperText,
@@ -18,7 +18,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   ...props
 }, ref) => {
   // Generate unique IDs for accessibility
-  const uniqueId = id || `input-${Math.random().toString(36).substring(2, 9)}`;
+  const uniqueId = id || `textarea-${Math.random().toString(36).substring(2, 9)}`;
   const errorId = `error-${uniqueId}`;
   const helperId = `helper-${uniqueId}`;
   const descriptionId = error ? errorId : helperText ? helperId : ariaDescribedBy;
@@ -31,10 +31,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
     transition-all duration-300 ease-in-out
     focus:outline-none focus:ring-2 focus:ring-offset-2
     disabled:opacity-50 disabled:cursor-not-allowed
-    min-h-[44px]
+    min-h-[120px] resize-y
   `;
 
-  const inputStyles = `
+  const textareaStyles = `
     ${baseStyles}
     ${error
       ? 'border-[var(--color-error)] focus:ring-[var(--color-error)]'
@@ -55,13 +55,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
           {props.required && <span className="text-[var(--color-error)] ml-1" aria-hidden="true">*</span>}
         </label>
       )}
-      <input 
+      <textarea 
         ref={ref}
         id={uniqueId}
-        className={inputStyles} 
+        className={textareaStyles}
         aria-invalid={!!error}
         aria-describedby={descriptionId}
-        {...props} 
+        {...props}
       />
       {(error || helperText) && (
         <p 
@@ -75,6 +75,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   );
 });
 
-Input.displayName = 'Input';
+Textarea.displayName = 'Textarea';
 
-export default Input; 
+export default Textarea; 

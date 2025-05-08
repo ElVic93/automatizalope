@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './accessibility.css';
+@import './animations.css';
+
 /* Reset y estilos base */
 * {
   margin: 0;
@@ -215,34 +218,87 @@ section {
   border: 0;
 }
 
+/* Estrategias para legibilidad de texto sobre imágenes */
+.texto-sobre-imagen.overlay-claro {
+  position: relative;
+}
+
+.texto-sobre-imagen.overlay-claro::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.15);
+  z-index: 1;
+}
+
+.texto-sobre-imagen.overlay-claro .texto-principal {
+  position: relative;
+  z-index: 2;
+  color: var(--color-text);
+}
+
+.texto-con-fondo-claro {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.texto-con-sombra {
+  color: var(--color-text);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.texto-con-resplandor {
+  color: var(--color-text);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+}
+
+.texto-con-degradado::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.3) 100%);
+  z-index: 1;
+}
+
+.texto-con-degradado .texto-principal {
+  position: relative;
+  z-index: 2;
+  color: var(--color-text);
+}
+
 /* Consolidación de tokens en un solo :root para sobrescribir cualquier variable previa */
 :root {
-  /* Colores principales - Esquema mejorado */
-  --color-primary: #0055FF; /* Azul intenso que transmite tecnología y confianza */
-  --color-primary-dark: #0044CC;
-  --color-primary-light: #3377FF;
-  --color-secondary: #00C2FF; /* Azul claro para detalles y acentos */
-  --color-secondary-dark: #00A3D9;
+  /* Colores Primarios */
+  --color-primary: #1E3A8A; /* Azul oscuro - Principal */
+  --color-primary-dark: #172E6F; /* Versión más oscura del principal */
+  --color-primary-light: #2C4A9A; /* Versión más clara del principal */
+  --color-secondary: #64B5F6; /* Azul claro - Secundario */
+  --color-secondary-dark: #4A9CE4; /* Versión más oscura del secundario */
+  --color-accent: #8E24AA; /* Morado medio - Acento */
   
-  /* Colores de texto - Mayor contraste */
-  --color-heading: #1A202C; /* Casi negro para títulos */
-  --color-text: #2D3748; /* Gris oscuro para texto general */
-  --color-text-light: #4A5568; /* Gris medio para texto secundario */
+  /* Colores de Texto */
+  --color-heading: #000000; /* Negro para títulos */
+  --color-text: #000000; /* Negro para texto principal */
+  --color-text-light: #374151; /* Gris oscuro para descripciones */
   
-  /* Colores de fondo */
-  --color-background: #FFFFFF;
-  --color-gray-light: #EDF2F7;
-  --color-gray-lighter: #F7FAFC;
-  --color-accent: #F0F9FF; /* Fondo azul muy claro para secciones destacadas */
+  /* Colores de Fondo */
+  --color-background: #FFFFFF; /* Blanco como fondo base */
+  --color-gray-light: #F3F4F6; /* Gris claro para fondos de secciones */
+  --color-gray-lighter: #E5E7EB; /* Gris muy claro para separadores */
   
-  /* Colores de estado - Más vibrantes para mejor feedback */
-  --color-success: #00B07A; /* Verde vivo */
-  --color-error: #E53E3E; /* Rojo intenso */
-  --color-warning: #ED8936; /* Naranja vibrante */
-  --color-info: #3182CE; /* Azul informativo */
-  
-  /* Colores específicos */
-  --color-whatsapp: #25D366;
+  /* Colores de Estado */
+  --color-success: #10B981; /* Verde para éxito */
+  --color-error: #EF4444; /* Rojo para error */
+  --color-warning: #F59E0B; /* Naranja para advertencia */
+  --color-info: #3B82F6; /* Azul para información */
+  --color-whatsapp: #25D366; /* Verde de WhatsApp */
 
   /* Familias de fuentes */
   --font-primary: 'Inter', sans-serif;
@@ -250,7 +306,7 @@ section {
   --font-tertiary: 'Montserrat', sans-serif;
   --font-quaternary: 'Lato', sans-serif;
   
-  /* Tamaños de fuente - Más jerárquicos */
+  /* Tamaños de fuente */
   --font-size-h1: 2.5rem;    /* 40px */
   --font-size-h2: 2rem;      /* 32px */
   --font-size-h3: 1.5rem;    /* 24px */
@@ -263,7 +319,7 @@ section {
   --font-weight-regular: 400;
   
   /* Altura de línea */
-  --line-height-base: 1.6; /* Aumentado para mejor legibilidad */
+  --line-height-base: 1.6;
   --line-height-heading: 1.3;
 
   /* Espaciado base */
@@ -280,35 +336,18 @@ section {
   --radius-lg: 1rem;      /* 16px */
   --radius-full: 9999px;
   
-  /* Sombras - Más pronunciadas para mejor profundidad */
+  /* Sombras */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
   --shadow-base: 0 4px 6px rgba(0, 0, 0, 0.07);
   --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.1);
   
-  /* Patrones de fondo más tech-friendly */
-  --background-pattern: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f0f5ff' fill-opacity='0.5'%3E%3Cpath d='M0 0h4v4H0V0zm8 0h4v4H8V0zm8 0h4v4h-4V0zM4 8h4v4H4V8zm8 0h4v4h-4V8zm-4-4h4v4h-4V4zm0 8h4v4h-4v-4zM0 8h4v4H0V8zm16 0h4v4h-4V8zM0 16h4v4H0v-4zm8 0h4v4H8v-4zm8 0h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
-  
-  /* Patrones alternativos */
-  --pattern-circuit: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%230055ff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
-  
-  --pattern-tech-boxes: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h32v32H0z'/%3E%3Cpath d='M2 2h2v28H2V2zm2 0h2v2H4V2zm0 28h2v2H4v-2zM6 2h2v2H6V2zm0 4h2v2H6V6zm0 4h2v2H6v-2zm0 4h2v2H6v-2zm0 4h2v2H6v-2zm0 4h2v2H6v-2zm0 4h2v2H6v-2zm0 4h2v2H6v-2zm4-28h2v2h-2V2zm0 28h2v2h-2v-2zm4-28h2v2h-2V2zm0 28h2v2h-2v-2zm4-28h2v2h-2V2zm0 28h2v2h-2v-2zm4-28h2v2h-2V2zm0 28h2v2h-2v-2zm4-28h2v2h-2V2zm0 28h2v2h-2v-2zm4-28h2v2h-2V2zm0 28h2v2h-2v-2z' fill='%230055ff' fill-opacity='0.03'/%3E%3C/g%3E%3C/svg%3E");
-  
-  --pattern-grid: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230055ff' fill-opacity='0.02' fill-rule='evenodd'%3E%3Cpath d='M0 0h40v40H0V0zm1 1h38v38H1V1z'/%3E%3C/g%3E%3C/svg%3E");
-  
-  /* Patrón actual pero guardado como opción */
-  --pattern-original: linear-gradient(135deg, #f5f7fa 25%, transparent 25%),
-                        linear-gradient(225deg, #f5f7fa 25%, transparent 25%),
-                        linear-gradient(45deg, #f5f7fa 25%, transparent 25%),
-                        linear-gradient(315deg, #f5f7fa 25%, #ffffff 25%);
-  
-  --background-pattern-dark: linear-gradient(135deg, #e6e9f0 25%, transparent 25%),
-                             linear-gradient(225deg, #e6e9f0 25%, transparent 25%),
-                             linear-gradient(45deg, #e6e9f0 25%, transparent 25%),
-                             linear-gradient(315deg, #e6e9f0 25%, #f0f2f5 25%);
+  /* Patrones de fondo */
+  --pattern-circuit: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231E3A8A' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
   
   /* Gradientes */
   --gradient-primary: linear-gradient(120deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  --gradient-accent: linear-gradient(120deg, var(--color-accent) 0%, #e6f6ff 100%);
-  --gradient-light: linear-gradient(120deg, #ffffff 0%, var(--color-gray-lighter) 100%);
+  --gradient-secondary: linear-gradient(120deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+  --gradient-accent: linear-gradient(120deg, var(--color-accent) 0%, #7B1FA2 100%);
+  --gradient-light: linear-gradient(120deg, #FFFFFF 0%, var(--color-gray-light) 100%);
 } 
