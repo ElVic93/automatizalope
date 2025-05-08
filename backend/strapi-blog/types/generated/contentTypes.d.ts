@@ -419,10 +419,12 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
     >;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
+    content: Schema.Attribute.RichText;
     cover: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
     description: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 80;
@@ -455,7 +457,6 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
   attributes: {
     articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    avatar: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

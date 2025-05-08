@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "postcss-import": "^16.1.0"
+  },
+  "dependencies": {
+    "@strapi/plugin-graphql": "^5.13.0"
   }
 }
