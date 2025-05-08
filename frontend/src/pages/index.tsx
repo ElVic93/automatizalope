@@ -64,7 +64,7 @@ const HomePage: React.FC = () => {
               
               {/* Overlay to ensure text readability - Oscurecido para mejorar legibilidad */}
               <div className="absolute inset-0 z-[1]" style={{
-                background: 'linear-gradient(135deg, rgba(0,85,255,0.75) 0%, rgba(0,36,107,0.7) 100%)',
+                background: 'linear-gradient(135deg, rgba(0,85,255,0.9) 0%, rgba(0,36,107,0.9) 100%)',
                 mixBlendMode: 'multiply',
               }}></div>
             </div>
@@ -196,7 +196,7 @@ const HomePage: React.FC = () => {
               
               {/* Overlay to ensure text readability */}
               <div className="absolute inset-0 z-[1]" style={{
-                background: 'linear-gradient(135deg, rgba(142, 36, 170, 0.75) 0%, rgba(82, 21, 99, 0.7) 100%)',
+                background: 'linear-gradient(135deg, rgba(142, 36, 170, 0.9) 0%, rgba(82, 21, 99, 0.9) 100%)',
                 mixBlendMode: 'multiply',
               }}></div>
             </div>
