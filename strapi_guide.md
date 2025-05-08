@@ -43,7 +43,7 @@ Node.js Node v16.x, v18.x, and v20.x Only LTS versions of Node are supported
 Node.js Package manager: npm or yarn
 Python (for SQLite Database)
 Git for version control
-If you prefer to see the ready-made version here are the links to the blog GitHub repo, and blog live link.
+If you prefer to see the ready-made version here are the links to the npm  GitHub repo, and blog live link.
 
 Set up Project Folder
 On your terminal, create a folder named gatsby-strapi-blog to store your project files.
