@@ -4,6 +4,21 @@
  * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
  */
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
+const strapiConfig = {
+  apiURL: process.env.STRAPI_API_URL || "http://127.0.0.1:1337",
+  collectionTypes: ["article", "category", "author"],
+  singleTypes: [],
+  queryLimit: 1000,
+  loginData: {
+    identifier: "",
+    password: "",
+  },
+};
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
@@ -16,6 +31,11 @@ module.exports = {
     twitter: '@automatizalo',
   },
   plugins: [
+    {
+      resolve: `gatsby-source-strapi`,
+      options: strapiConfig,
+    },
+    "gatsby-transformer-remark",
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,

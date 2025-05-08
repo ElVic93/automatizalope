@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { graphql, Link } from 'gatsby';
 import Layout from '../../components/layout/Layout';
 import Container from '../../components/ui/Container';
 import Card from '../../components/ui/Card';
@@ -6,7 +7,30 @@ import Grid from '../../components/ui/Grid';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 
-const BlogPage: React.FC = () => {
+interface BlogPost {
+  id: string;
+  title: string;
+  description: string;
+  slug: string;
+  publishedAt: string;
+  author: {
+    name: string;
+  };
+  category: {
+    name: string;
+    slug: string;
+  };
+}
+
+interface BlogPageProps {
+  data: {
+    allStrapiArticle: {
+      nodes: BlogPost[];
+    };
+  };
+}
+
+const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -20,45 +44,16 @@ const BlogPage: React.FC = () => {
     { id: 'casos-de-exito', name: 'Casos de Éxito' }
   ];
 
-  // Mock data para desarrollo
-  const posts = [
-    {
-      id: 1,
-      title: 'Cómo la automatización puede transformar tu negocio',
-      excerpt: 'Descubre las ventajas de implementar procesos automatizados en tu empresa y cómo esto puede impulsar tu crecimiento.',
-      category: 'automatizacion',
-      date: '2024-03-15',
-      author: 'Juan Pérez',
-      readTime: '5 min'
-    },
-    {
-      id: 2,
-      title: '5 herramientas esenciales para aumentar la productividad',
-      excerpt: 'Una guía completa de las mejores herramientas que puedes implementar hoy mismo para mejorar la eficiencia de tu equipo.',
-      category: 'productividad',
-      date: '2024-03-10',
-      author: 'María García',
-      readTime: '7 min'
-    },
-    {
-      id: 3,
-      title: 'Tendencias tecnológicas para 2024',
-      excerpt: 'Las tecnologías emergentes que están transformando la manera en que las empresas operan y compiten en el mercado.',
-      category: 'tecnologia',
-      date: '2024-03-05',
-      author: 'Carlos Rodríguez',
-      readTime: '6 min'
-    },
-    {
-      id: 4,
-      title: 'Caso de éxito: Transformación digital en el sector retail',
-      excerpt: 'Cómo una empresa retail logró aumentar sus ventas en un 40% implementando soluciones de automatización.',
-      category: 'casos-de-exito',
-      date: '2024-03-01',
-      author: 'Ana Martínez',
-      readTime: '8 min'
-    }
-  ];
+  const posts = data.allStrapiArticle.nodes.map(post => ({
+    id: post.id,
+    title: post.title,
+    excerpt: post.description,
+    category: post.category?.slug || 'sin-categoria',
+    date: post.publishedAt,
+    author: post.author?.name || 'Autor desconocido',
+    readTime: '5 min', // Podrías calcular esto basado en el contenido
+    slug: post.slug
+  }));
 
   const filteredPosts = posts.filter(post => {
     const matchesCategory = selectedCategory === 'todos' || post.category === selectedCategory;
@@ -141,12 +136,16 @@ const BlogPage: React.FC = () => {
                 </Card.Header>
                 <Card.Footer>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-[var(--color-text-light)]">
-                      Por {post.author}
-                    </span>
-                    <Button variant="outline" size="sm">
-                      Leer más
-                    </Button>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-[var(--color-text-light)]">
+                        Por {post.author}
+                      </span>
+                    </div>
+                    <Link to={`/blog/${post.slug}`}>
+                      <Button variant="outline" size="sm">
+                        Leer más
+                      </Button>
+                    </Link>
                   </div>
                 </Card.Footer>
               </Card>
@@ -232,5 +231,26 @@ const BlogPage: React.FC = () => {
     </Layout>
   );
 };
+
+export const query = graphql`
+  query {
+    allStrapiArticle(sort: {publishedAt: DESC}) {
+      nodes {
+        id
+        title
+        description
+        slug
+        publishedAt(formatString: "YYYY-MM-DD")
+        author {
+          name
+        }
+        category {
+          name
+          slug
+        }
+      }
+    }
+  }
+`;
 
 export default BlogPage; 

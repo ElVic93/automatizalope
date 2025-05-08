@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../ui/Navbar';
 import Footer from '../ui/Footer';
 import SEO from '../SEO';
+import { Link, graphql, useStaticQuery } from 'gatsby';
 
 interface LayoutProps {
   children: React.ReactNode;
