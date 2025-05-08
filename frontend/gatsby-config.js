@@ -29,15 +29,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Automatizalo.pe`,
+        short_name: `Automatizalo`,
         start_url: `/`,
-        background_color: `#663399`,
+        background_color: `#0055FF`,
         // This will impact how browsers show your PWA/website
-        // https://css-tricks.com/meta-theme-color-and-trickery/
-        // theme_color: `#663399`,
+        theme_color: `#0055FF`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/hero-image.png`, // Cambiado a hero-image.png
       },
     },
     'gatsby-plugin-react-helmet',
