@@ -6,6 +6,7 @@ import Card from '../components/ui/Card';
 import Grid from '../components/ui/Grid';
 import { StaticImage } from 'gatsby-plugin-image';
 import ScrollReveal from '../components/animation/ScrollReveal';
+import { FaWhatsapp, FaHeadset, FaSync, FaBullhorn, FaRobot, FaChartLine } from 'react-icons/fa';
 
 const HomePage: React.FC = () => {
   return (
@@ -78,7 +79,7 @@ const HomePage: React.FC = () => {
         <Container className="relative z-20">
           <div className="max-w-3xl mx-auto text-center text-white">
             <ScrollReveal animation="fade-in-down" duration="normal">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 drop-shadow-lg">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 md:mb-8 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
                 Automatiza tus procesos, potencia tu negocio
               </h1>
             </ScrollReveal>
@@ -111,16 +112,34 @@ const HomePage: React.FC = () => {
           <Grid cols={3} gap="lg">
             {[
               {
-                title: "Automatización de Procesos",
-                description: "Optimiza tus operaciones eliminando tareas repetitivas y reduciendo errores humanos."
+                title: "WhatsApp con IA para Ventas",
+                description: "Conectamos tu WhatsApp con un asistente inteligente que responde consultas, califica prospectos y los deriva a tu equipo de ventas. ¡Disponible 24/7!",
+                icon: <FaWhatsapp className="text-2xl text-[var(--color-primary)]" />
               },
               {
-                title: "Integración de Sistemas",
-                description: "Conecta tus aplicaciones existentes para crear flujos de trabajo sin interrupciones."
+                title: "Atención al Cliente Automatizada",
+                description: "Flujos de respuesta automáticos para WhatsApp, formularios web y redes sociales. Resuelve dudas comunes al instante sin agentes humanos.",
+                icon: <FaHeadset className="text-2xl text-[var(--color-primary)]" />
               },
               {
-                title: "Desarrollo a Medida",
-                description: "Soluciones personalizadas que se adaptan perfectamente a las necesidades de tu negocio."
+                title: "Automatización de Tareas",
+                description: "Integración entre herramientas como Google Sheets, Notion, CRMs y plataformas propias. Elimina el trabajo manual y optimiza tus procesos.",
+                icon: <FaSync className="text-2xl text-[var(--color-primary)]" />
+              },
+              {
+                title: "Marketing Automatizado",
+                description: "Automatizamos tus campañas de marketing con correos personalizados, seguimientos y alertas según el comportamiento del cliente.",
+                icon: <FaBullhorn className="text-2xl text-[var(--color-primary)]" />
+              },
+              {
+                title: "Bots Inteligentes",
+                description: "Diseñamos bots que simulan trabajo humano: recopilación de datos, scraping, envío de correos e interacción con APIs de terceros.",
+                icon: <FaRobot className="text-2xl text-[var(--color-primary)]" />
+              },
+              {
+                title: "Consultoría Digital",
+                description: "Asesoramiento especializado en automatización, integración de herramientas y optimización de procesos para tu negocio.",
+                icon: <FaChartLine className="text-2xl text-[var(--color-primary)]" />
               }
             ].map((service, i) => (
               <ScrollReveal 
@@ -131,12 +150,15 @@ const HomePage: React.FC = () => {
               >
                 <Card variant="elevated" className="shadow-md hover:shadow-lg transition-all h-full hover-lift">
                   <Card.Header>
-                    <h3 className="text-lg md:text-xl font-semibold">
-                      {service.title}
-                    </h3>
+                    <div className="flex items-center gap-3 mb-2">
+                      {service.icon}
+                      <h3 className="text-lg md:text-xl font-semibold">
+                        {service.title}
+                      </h3>
+                    </div>
                   </Card.Header>
                   <Card.Body>
-                    <p>
+                    <p className="text-[var(--color-text-light)]">
                       {service.description}
                     </p>
                   </Card.Body>
@@ -196,7 +218,7 @@ const HomePage: React.FC = () => {
               
               {/* Overlay to ensure text readability */}
               <div className="absolute inset-0 z-[1]" style={{
-                background: 'linear-gradient(135deg, rgba(142, 36, 170, 0.9) 0%, rgba(82, 21, 99, 0.9) 100%)',
+                background: 'linear-gradient(135deg, rgba(142, 36, 170, 0.85) 0%, rgba(82, 21, 99, 0.85) 100%)',
                 mixBlendMode: 'multiply',
               }}></div>
             </div>
@@ -204,15 +226,15 @@ const HomePage: React.FC = () => {
         </div>
 
         <Container className="relative z-10">
-          <div className="max-w-3xl mx-auto text-center text-white">
+          <div className="max-w-3xl mx-auto text-center">
             <ScrollReveal animation="fade-in-up">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 drop-shadow-lg">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
                 ¿Listo para transformar tu negocio?
               </h2>
             </ScrollReveal>
             
             <ScrollReveal animation="fade-in-up" delay={200}>
-              <p className="text-base md:text-xl mb-6 md:mb-8 drop-shadow-md">
+              <p className="text-base md:text-xl mb-6 md:mb-8 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.2)]">
                 Agenda una consulta gratuita y descubre cómo podemos ayudarte a
                 automatizar tus procesos.
               </p>
