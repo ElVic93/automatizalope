@@ -4,46 +4,62 @@
  * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
  */
 const path = require('path');
-// Import the mock data from the CommonJS version
-const { mockBlogPosts, mockServices } = require('./src/data/mockData.js');
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
-  
-  // In development mode, we'll use mock data to create pages
-  // Later, when Strapi is connected, we'll use GraphQL to fetch real data
-  
-  // Create blog post pages
-  mockBlogPosts.forEach(post => {
+
+  // Crear páginas de artículos desde Strapi
+  const articlesResult = await graphql(`
+    {
+      allStrapiArticle {
+        nodes {
+          id
+          slug
+        }
+      }
+    }
+  `);
+
+  if (articlesResult.errors) {
+    throw articlesResult.errors;
+  }
+
+  articlesResult.data.allStrapiArticle.nodes.forEach(article => {
     createPage({
-      path: `/blog/${post.slug}`,
-      component: require.resolve("./src/templates/blog-post.tsx"),
-      context: {
-        mockData: post,
-      },
+      path: `/blog/${article.slug}`,
+      component: path.resolve('./src/pages/blog/{strapiArticle.slug}.js'),
+      context: { id: article.id },
     });
   });
-  
-  // Create service pages
-  mockServices.forEach((service, index) => {
-    const slug = service.title
-      .toLowerCase()
-      .replace(/[^\w\s]/gi, '')
-      .replace(/\s+/g, '-');
-    
+
+  // Crear páginas de categorías desde Strapi
+  const categoriesResult = await graphql(`
+    {
+      allStrapiCategory {
+        nodes {
+          id
+          slug
+        }
+      }
+    }
+  `);
+
+  if (categoriesResult.errors) {
+    throw categoriesResult.errors;
+  }
+
+  categoriesResult.data.allStrapiCategory.nodes.forEach(category => {
     createPage({
-      path: `/servicios/${slug}`,
-      component: require.resolve("./src/templates/service.tsx"),
-      context: {
-        mockData: service,
-      },
+      path: `/blog/${category.slug}`,
+      component: path.resolve('./src/pages/blog/{strapiCategory.slug}.js'),
+      context: { id: category.id },
     });
   });
-  
-  // Create DSG example page (leave this for reference)
+
+  // Página DSG de ejemplo
   createPage({
     path: "/using-dsg",
     component: require.resolve("./src/templates/using-dsg.tsx"),
