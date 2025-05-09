@@ -14,9 +14,11 @@ const strapiConfig = {
   singleTypes: [],
   queryLimit: 1000,
   loginData: {
-    identifier: "",
+    identifier: process.env.STRAPI_API_TOKEN || "",
     password: "",
   },
+  token: process.env.STRAPI_API_TOKEN,
+  imagePrefix: process.env.STRAPI_API_URL || "http://127.0.0.1:1337",
 };
 
 /**
