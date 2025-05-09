@@ -16,10 +16,7 @@ interface BlogPost {
   author: {
     name: string;
   };
-  category: {
-    name: string;
-    slug: string;
-  };
+  category?: string;
 }
 
 interface BlogPageProps {
@@ -48,10 +45,10 @@ const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
     id: post.id,
     title: post.title,
     excerpt: post.description,
-    category: post.category?.slug || 'sin-categoria',
+    category: 'sin-categoria',
     date: post.publishedAt,
     author: post.author?.name || 'Autor desconocido',
-    readTime: '5 min', // Podrías calcular esto basado en el contenido
+    readTime: '5 min',
     slug: post.slug
   }));
 
@@ -202,13 +199,10 @@ const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
                   helperText="Nunca compartiremos tu correo con terceros"
                 />
                 <Button 
-                  type="submit" 
                   variant="primary"
                   disabled={subscriptionStatus.submitted && !subscriptionStatus.success}
-                  loading={subscriptionStatus.submitted && !subscriptionStatus.success}
-                  ariaLabel="Suscribirte al newsletter"
                 >
-                  Suscribirse
+                  {subscriptionStatus.submitted && !subscriptionStatus.success ? 'Procesando...' : 'Suscribirse'}
                 </Button>
               </div>
               
@@ -243,10 +237,6 @@ export const query = graphql`
         publishedAt(formatString: "YYYY-MM-DD")
         author {
           name
-        }
-        category {
-          name
-          slug
         }
       }
     }

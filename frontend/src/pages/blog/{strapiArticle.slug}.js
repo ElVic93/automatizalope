@@ -135,16 +135,11 @@ export const query = graphql`
       }
       cover {
         url
-        alternativeText
         width
         height
       }
       author {
         name
-      }
-      category {
-        name
-        slug
       }
     }
   }
